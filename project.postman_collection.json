@@ -1,0 +1,476 @@
+{
+	"info": {
+		"_postman_id": "867e5153-dc08-46e3-9575-b4ea849034bd",
+		"name": "project",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Swagger",
+			"item": [
+				{
+					"name": "FindByStatus",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"\r",
+									"pm.test('Data Json Success', function () {\r",
+									" pm.expect(pm.response.headers.get(\"Content-Type\")).to.be.equal(\"application/json\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Data Come Success\", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"id\");\r",
+									"});\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/findByStatus?status=available",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"findByStatus"
+							],
+							"query": [
+								{
+									"key": "status",
+									"value": "available"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update an exitsting pet",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"\r",
+									"pm.test('Data Json Success', function () {\r",
+									" pm.expect(pm.response.headers.get(\"Content-Type\")).to.be.equal(\"application/json\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Data Come Success\", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"id\");\r",
+									"});\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"id\": 11,\r\n  \"name\": \"doggie\",\r\n  \"category\": {\r\n    \"id\": 1,\r\n    \"name\": \"Dogs\"\r\n  },\r\n  \"photoUrls\": [\r\n    \"string\"\r\n  ],\r\n  \"tags\": [\r\n    {\r\n      \"id\": 0,\r\n      \"name\": \"string\"\r\n    }\r\n  ],\r\n  \"status\": \"available\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}",
+							"host": [
+								"{{BASE_URL}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add new pet",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"\r",
+									"\r",
+									"pm.test(\"Data Come Success\", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"id\");\r",
+									"});\r",
+									"\r",
+									"pm.test('Data Json Success', function () {\r",
+									" pm.expect(pm.response.headers.get(\"Content-Type\")).to.be.equal(\"application/json\");\r",
+									"});\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"id\": 10,\r\n  \"name\": \"doggie\",\r\n  \"category\": {\r\n    \"id\": 1,\r\n    \"name\": \"Dogs\"\r\n  },\r\n  \"photoUrls\": [\r\n    \"string\"\r\n  ],\r\n  \"tags\": [\r\n    {\r\n      \"id\": 0,\r\n      \"name\": \"string\"\r\n    }\r\n  ],\r\n  \"status\": \"available\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}",
+							"host": [
+								"{{BASE_URL}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "find pets by tags",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"\r",
+									"\r",
+									"pm.test(\"Data Come Success\", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"id\");\r",
+									"});\r",
+									"\r",
+									"pm.test('Data Json Success', function () {\r",
+									" pm.expect(pm.response.headers.get(\"Content-Type\")).to.be.equal(\"application/json\");\r",
+									"});\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/findByTags?tags=string",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"findByTags"
+							],
+							"query": [
+								{
+									"key": "tags",
+									"value": "string",
+									"description": "Tags to filter by"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "find pet by id",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"\r",
+									"\r",
+									"pm.globals.set(\"id\", \"10\");\r",
+									"\r",
+									"pm.test(\"Body matches string\", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"name\");\r",
+									"var schema = {\r",
+									"  \"items\": {\r",
+									"    \"type\": \"boolean\"\r",
+									"  }\r",
+									"};\r",
+									"});\r",
+									"\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "content-type",
+								"value": "application/json ",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{BASE_URL}}/{{id}}",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"{{id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update with a form data",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"\r",
+									"\r",
+									"\r",
+									"\r",
+									"\r",
+									"\r",
+									"\r",
+									"pm.test(\"Body matches string\", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"name\");\r",
+									"var schema = {\r",
+									"  \"items\": {\r",
+									"    \"type\": \"boolean\"\r",
+									"  }\r",
+									"};\r",
+									"});\r",
+									"\r",
+									"\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\" : 10,\r\n    \"name\" :\"dog\",\r\n    \"status\":\"avaliable\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}",
+							"host": [
+								"{{BASE_URL}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete pet by ID",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.globals.set(\"id\", \"10\");\r",
+									"\r",
+									"\r",
+									"\r",
+									"\r",
+									"pm.test('Content Length True', function () {\r",
+									" pm.expect(pm.response.headers.get(\"Content-Length\")).to.be.equal('11');\r",
+									"});\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/{{id}}",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"{{id}}"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"",
+							"pm.test('status is OK', function () {",
+							" pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test('Time is Below than 200', function () {",
+							" pm.expect(pm.response.responseTime).to.be.below(2000);",
+							"});",
+							"",
+							"",
+							"pm.test('Connection Success', function () {",
+							" pm.expect(pm.response.headers.get(\"Connection\")).to.equal(\"keep-alive\");",
+							"});"
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "TRELLO REST APIs",
+			"item": [
+				{
+					"name": "Request (API Trello)",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://api.trello.com/1/members/me?boards=open&key=3a55009c28f9900320798297c0f39004&token=a4bb283f7b38f6dd07ea1080817900f58ad3ad4d3791fa1162638e95ff8f79b2",
+							"protocol": "https",
+							"host": [
+								"api",
+								"trello",
+								"com"
+							],
+							"path": [
+								"1",
+								"members",
+								"me"
+							],
+							"query": [
+								{
+									"key": "boards",
+									"value": "open"
+								},
+								{
+									"key": "key",
+									"value": "3a55009c28f9900320798297c0f39004"
+								},
+								{
+									"key": "token",
+									"value": "a4bb283f7b38f6dd07ea1080817900f58ad3ad4d3791fa1162638e95ff8f79b2"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "MyApiTrello",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://api.trello.com/1/boards/Hqv2BulU?key=3a55009c28f9900320798297c0f39004&token=a4bb283f7b38f6dd07ea1080817900f58ad3ad4d3791fa1162638e95ff8f79b2",
+							"protocol": "https",
+							"host": [
+								"api",
+								"trello",
+								"com"
+							],
+							"path": [
+								"1",
+								"boards",
+								"Hqv2BulU"
+							],
+							"query": [
+								{
+									"key": "key",
+									"value": "3a55009c28f9900320798297c0f39004"
+								},
+								{
+									"key": "token",
+									"value": "a4bb283f7b38f6dd07ea1080817900f58ad3ad4d3791fa1162638e95ff8f79b2"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"",
+							"pm.test('status is OK', function () {",
+							" pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test('Time is Below than 200', function () {",
+							" pm.expect(pm.response.responseTime).to.be.below(2000);",
+							"});",
+							"",
+							"",
+							"pm.test(\"Data Come Success\", function () {",
+							"    pm.expect(pm.response.text()).to.include(\"id\");",
+							"});",
+							"",
+							"pm.test('Data Json Success', function () {",
+							" pm.expect(pm.response.headers.get(\"Content-Type\")).to.be.equal(\"application/json; charset=utf-8\");",
+							"});",
+							"",
+							"",
+							""
+						]
+					}
+				}
+			]
+		}
+	]
+}
