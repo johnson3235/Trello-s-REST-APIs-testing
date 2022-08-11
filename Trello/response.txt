@@ -1,0 +1,16 @@
+"boards": [
+        {
+            "id": "62f3cac2db007e6357591762",
+            "name": "Project Management",
+            "closed": false,
+            "idOrganization": "62f3ca6949f33e1474448260",
+            "pinned": false
+        },
+        {
+            "id": "62f3ca86c4000620cd837bcb",
+            "name": "board",
+            "closed": false,
+            "idOrganization": "62f3ca6949f33e1474448260",
+            "pinned": false
+        }
+    ]

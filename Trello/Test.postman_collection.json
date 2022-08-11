@@ -1,0 +1,384 @@
+{
+	"info": {
+		"_postman_id": "db4d8285-7782-4c49-a695-b91acd6537a3",
+		"name": "Test",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "19778653"
+	},
+	"item": [
+		{
+			"name": "Create a board",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Close is false\", function () {\r",
+							"    pm.expect(pm.response.json().closed).to.be.equal(false);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"permissionLevel is private\", function () {\r",
+							"    pm.expect(pm.response.json().prefs.permissionLevel).to.be.equal('private');\r",
+							"});\r",
+							"\r",
+							"pm.test(\"canBePublic is true\", function () {\r",
+							"    pm.expect(pm.response.json().prefs.canBePublic).to.be.equal(true);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"canInvite is true\", function () {\r",
+							"    pm.expect(pm.response.json().prefs.canInvite).to.be.equal(true);\r",
+							"});\r",
+							"\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://api.trello.com/1/boards/?name=john&key=3a55009c28f9900320798297c0f39004&token=a4bb283f7b38f6dd07ea1080817900f58ad3ad4d3791fa1162638e95ff8f79b2",
+					"protocol": "https",
+					"host": [
+						"api",
+						"trello",
+						"com"
+					],
+					"path": [
+						"1",
+						"boards",
+						""
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "john"
+						},
+						{
+							"key": "key",
+							"value": "3a55009c28f9900320798297c0f39004"
+						},
+						{
+							"key": "token",
+							"value": "a4bb283f7b38f6dd07ea1080817900f58ad3ad4d3791fa1162638e95ff8f79b2"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get data",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"number of boards is above 1\", function () {\r",
+							"    pm.expect(pm.response.json().boards[2]).not.equal(null);\r",
+							"});\r",
+							"\r",
+							"const jsonData = pm.response.json().boards;\r",
+							"count = jsonData.length-1\r",
+							"\r",
+							"pm.globals.set(\"FirstBoardID\", pm.response.json().boards[0].id);\r",
+							"\r",
+							"pm.globals.set(\"LastBoardID\", pm.response.json().boards[count].id);\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{BaseURL}}/members/me?boards=open&key=3a55009c28f9900320798297c0f39004&token=a4bb283f7b38f6dd07ea1080817900f58ad3ad4d3791fa1162638e95ff8f79b2",
+					"host": [
+						"{{BaseURL}}"
+					],
+					"path": [
+						"members",
+						"me"
+					],
+					"query": [
+						{
+							"key": "boards",
+							"value": "open"
+						},
+						{
+							"key": "key",
+							"value": "3a55009c28f9900320798297c0f39004"
+						},
+						{
+							"key": "token",
+							"value": "a4bb283f7b38f6dd07ea1080817900f58ad3ad4d3791fa1162638e95ff8f79b2"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete a board",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"\r",
+							"\r",
+							"pm.test(\"Board is removed Successfully\", function () {\r",
+							"    pm.expect(pm.response.code).to.be.oneOf([200,404]);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{BaseURL}}/boards/{{BoardId}}/?name=john&key=3a55009c28f9900320798297c0f39004&token=a4bb283f7b38f6dd07ea1080817900f58ad3ad4d3791fa1162638e95ff8f79b2",
+					"host": [
+						"{{BaseURL}}"
+					],
+					"path": [
+						"boards",
+						"{{BoardId}}",
+						""
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "john"
+						},
+						{
+							"key": "key",
+							"value": "3a55009c28f9900320798297c0f39004"
+						},
+						{
+							"key": "token",
+							"value": "a4bb283f7b38f6dd07ea1080817900f58ad3ad4d3791fa1162638e95ff8f79b2"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create a list",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Close is false\", function () {\r",
+							"    pm.expect(pm.response.json().closed).to.be.equal(false);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"limits is empty\", function () {\r",
+							"    pm.expect(pm.response.json().limits).to.be.empty;\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"id is correct\", function () {\r",
+							"    pm.expect(pm.response.json().id).not.equal(null)\r",
+							"});\r",
+							"\r",
+							"pm.test(\"name is correct\", function () {\r",
+							"    pm.expect(pm.response.json().name).not.equal(null)\r",
+							"});\r",
+							"\r",
+							"pm.test(\"idBoard is correct\", function () {\r",
+							"    pm.expect(pm.response.json().idBoard).not.equal(null)\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.globals.set(\"FirstListID1\", pm.response.json().id);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "{{BaseURL}}/lists/?name=john&idBoard=62f3cac2db007e6357591762&key=3a55009c28f9900320798297c0f39004&token=a4bb283f7b38f6dd07ea1080817900f58ad3ad4d3791fa1162638e95ff8f79b2",
+					"host": [
+						"{{BaseURL}}"
+					],
+					"path": [
+						"lists",
+						""
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "john"
+						},
+						{
+							"key": "idBoard",
+							"value": "62f3cac2db007e6357591762"
+						},
+						{
+							"key": "key",
+							"value": "3a55009c28f9900320798297c0f39004"
+						},
+						{
+							"key": "token",
+							"value": "a4bb283f7b38f6dd07ea1080817900f58ad3ad4d3791fa1162638e95ff8f79b2"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get lists on board",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"number of lists = 3\", function () {\r",
+							"    pm.expect(pm.response.json().length).equal(3);\r",
+							"});\r",
+							"\r",
+							"const jsonData = pm.response.json();\r",
+							"count = jsonData.length-1\r",
+							"\r",
+							"pm.globals.set(\"FirstListID\", pm.response.json()[0].id);\r",
+							"\r",
+							"pm.globals.set(\"LastListID\", pm.response.json()[count].id);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{BaseURL}}/boards/62f56c74a26571002649a8be/lists?key=3a55009c28f9900320798297c0f39004&token=a4bb283f7b38f6dd07ea1080817900f58ad3ad4d3791fa1162638e95ff8f79b2",
+					"host": [
+						"{{BaseURL}}"
+					],
+					"path": [
+						"boards",
+						"62f56c74a26571002649a8be",
+						"lists"
+					],
+					"query": [
+						{
+							"key": "key",
+							"value": "3a55009c28f9900320798297c0f39004"
+						},
+						{
+							"key": "token",
+							"value": "a4bb283f7b38f6dd07ea1080817900f58ad3ad4d3791fa1162638e95ff8f79b2"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Archive or unarchive a list",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"var data = pm.response.json();\r",
+							" if(data.closed == true ){\r",
+							"    pm.globals.set(\"value\", false);\r",
+							"    pm.test(\"Archive success\", function () {\r",
+							"        pm.globals.get(\"value\")== true;\r",
+							"});\r",
+							"  }\r",
+							"  else\r",
+							"  {\r",
+							"      pm.globals.set(\"value\", true);\r",
+							"         pm.test(\"UnArchive success\", function () {\r",
+							"        pm.globals.get(\"value\")== false;\r",
+							"});\r",
+							"}\r",
+							"\r",
+							"\r",
+							" pm.test(\"Header have set-Cookie\", function () {\r",
+							"        pm.expect(pm.response.headers.get(\"Set-Cookie\"))\r",
+							"});\r",
+							"\r",
+							"\r",
+							"\r",
+							"\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"value\" : \"true\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BaseURL}}/lists/{{FirstListID}}/closed?key=3a55009c28f9900320798297c0f39004&token=a4bb283f7b38f6dd07ea1080817900f58ad3ad4d3791fa1162638e95ff8f79b2&value={{value}}",
+					"host": [
+						"{{BaseURL}}"
+					],
+					"path": [
+						"lists",
+						"{{FirstListID}}",
+						"closed"
+					],
+					"query": [
+						{
+							"key": "key",
+							"value": "3a55009c28f9900320798297c0f39004"
+						},
+						{
+							"key": "token",
+							"value": "a4bb283f7b38f6dd07ea1080817900f58ad3ad4d3791fa1162638e95ff8f79b2"
+						},
+						{
+							"key": "value",
+							"value": "{{value}}"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
